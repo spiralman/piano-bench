@@ -8,9 +8,12 @@
 (def wholes (comp (scale/from 24) scale/major))
 
 (defn has-black [key]
-  (if (= 2
-         (- (wholes (inc key))
-            (wholes key)))
+  (if (and
+       (= 2
+          (- (wholes (inc key))
+             (wholes key)))
+       ;; Pianos don't have a G#0/Ab0
+       (not= key -3))
     key))
 
 (defn octave [n]
