@@ -5,31 +5,43 @@
 (def black-width 33.15)
 (def white-width 69.19)
 
-(def white-notes (map (comp scale/C scale/major) (range 7)))
-(def black-notes (map (comp scale/C (scale/scale [1 2 1 1 2])) (range 5)))
+(def wholes (comp (scale/from 24) scale/major))
 
-(defn black-key [note]
-  (let [pos (inc (- note 60))]
-    [:g {:transform (str "translate(" (- (* pos white-width)
-                                         (/ black-width 2)) ")")
-         :stroke "#000000" :stroke-width "1" :fill "#000000"}
-     [:path {:d "M0,0 L8.35795057e-07,203.122781 C8.44881404e-07,205.33103 1.78205875,207.12117 3.99814921,207.12117 L29.1475731,207.12117 C31.3556894,207.12117 33.1457214,205.330596 33.1457214,203.122781 L33.1457206,0 L0,0 Z"}]]))
+(defn has-black [key]
+  (if (= 2
+         (- (wholes (inc key))
+            (wholes key)))
+    key))
 
-(defn white-key [pos note]
-  [:g {:transform (str "translate(" (* pos white-width) ")")
-       :stroke "#000000" :stroke-width "1" :fill "#FFFFFF"}
+(defn octave [n]
+  (* 7 (dec n)))
+
+(defn black-key [start-key white-key]
+  [:g {:transform (str "translate(" (- (* (- (inc white-key) start-key) white-width)
+                                       (/ black-width 2)) ")")
+       :stroke "#000000" :stroke-width "1" :fill "#000000"
+       :on-click #(println (inc (wholes white-key)))}
+   [:path {:d "M0,0 L8.35795057e-07,203.122781 C8.44881404e-07,205.33103 1.78205875,207.12117 3.99814921,207.12117 L29.1475731,207.12117 C31.3556894,207.12117 33.1457214,205.330596 33.1457214,203.122781 L33.1457206,0 L0,0 Z"}]])
+
+(defn white-key [start-key key]
+  [:g {:transform (str "translate(" (* (- key start-key) white-width) ")")
+       :stroke "#000000" :stroke-width "1" :fill "#FFFFFF"
+       :on-click #(println (wholes key))}
    [:path {:d "M0,324.998255 C0,327.760984 2.24331036,330.000618 5.00408559,330.000618 L64.1897584,330.000618 C66.9534386,330.000618 69.193844,327.761793 69.193844,324.998255 L69.193844,0 L0,0 L0,324.998255 Z"}]])
 
-(defn keyboard []
-  [:svg {:width "100%" :height "100%" :view-box "0 0 900 400" :fill "none"}
-   [:g {:transform "translate(0,5)"}
-    (map-indexed white-key white-notes)
-    (map black-key black-notes)]])
+(defn keyboard [start-key]
+  (let [end-key (+ start-key 8)
+        keys (range start-key end-key)
+        black-keys (keep has-black (range (dec start-key) end-key))]
+    [:svg {:width "100%" :height "100%" :view-box "0 0 900 400" :fill "none"}
+     [:g {:transform "translate(0,5)"}
+      (map (partial white-key start-key) keys)
+      (map (partial black-key start-key) black-keys)]]))
 
 (defn app []
   [:div
    [:h1 "Piano Bench"]
-   [keyboard]])
+   [keyboard (- (octave 4) 2)]])
 
 (defn render []
   (reagent/render [app]
