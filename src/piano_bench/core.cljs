@@ -21,7 +21,9 @@
   (* 7 (dec n)))
 
 (defn octave [white-key]
-  (inc (int (/ white-key 7))))
+  (if (>= white-key 0)
+    (inc (int (/ white-key 7)))
+    0))
 
 (defn note [white-key]
   (nth notes (mod white-key 7)))
