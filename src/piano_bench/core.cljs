@@ -54,14 +54,21 @@
        :on-click #(println (white-key-name key))}
    [:path {:d "M0,324.998255 C0,327.760984 2.24331036,330.000618 5.00408559,330.000618 L64.1897584,330.000618 C66.9534386,330.000618 69.193844,327.761793 69.193844,324.998255 L69.193844,0 L0,0 L0,324.998255 Z"}]])
 
+(defn popup [start-key key key-name]
+  [:g {:transform (str "translate(" (* (- key start-key) white-width) ",-81)")
+       :fill "#00FF00"}
+   [:path {:d "M8.00456499,0 L61.1854375,0 C65.6062366,0 69.1900024,3.57425806 69.1900024,8.00456499 L69.1900024,61.1854375 C69.1900024,65.6062366 65.6157444,69.1900024 61.1854375,69.1900024 L45.4916992,69.1900024 L34.8994141,80.8984375 L24.3071289,69.1900024 L8.00456499,69.1900024 C3.58376582,69.1900024 0,65.6157444 0,61.1854375 L0,8.00456499 C0,3.58376582 3.57425806,0 8.00456499,0 Z"}]])
+
 (defn keyboard [start-key]
-  (let [end-key (+ start-key 8)
+  (let [scale (/ 900 (* 8 white-width))
+        end-key (+ start-key 8)
         keys (range start-key end-key)
         black-keys (keep has-black (range (dec start-key) end-key))]
-    [:svg {:width "100%" :height "100%" :view-box "0 0 900 400" :fill "none"}
-     [:g {:transform "translate(0,5)"}
+    [:svg {:width "100%" :height "100%" :view-box "0 0 900 800" :fill "none"}
+     [:g {:transform (str "translate(0,145) scale(" scale ")")}
       (map (partial white-key start-key) keys)
-      (map (partial black-key start-key) black-keys)]]))
+      (map (partial black-key start-key) black-keys)
+      [popup start-key start-key "A3"]]]))
 
 (defn app []
   [:div
