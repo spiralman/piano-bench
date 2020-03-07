@@ -1,4 +1,5 @@
-(ns piano-bench.core
+(ns ^:figwheel-hooks
+    piano-bench.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [piano-bench.keyboard :as kb]))
@@ -37,16 +38,12 @@
     @(rf/subscribe [:pressed])
     #(rf/dispatch [:key-pressed %1 %2])]])
 
-(defn render []
+(defn ^:after-load render []
   (reagent/render [app]
                   (js/document.getElementById "piano-bench")))
 
-(defn re-load []
-  (let [old-app-el (js/document.getElementById "piano-bench")
-        parent (.-parentNode old-app-el)
-        new-app-el (js/document.createElement "DIV")]
-    (.remove old-app-el)
-    (.setAttribute new-app-el "id" "piano-bench")
-    (.appendChild parent new-app-el)
+(defonce start-up
+  (do
+    (render)
     (rf/dispatch-sync [:initialize])
-    (render)))
+    true))
