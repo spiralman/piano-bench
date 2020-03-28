@@ -2,6 +2,7 @@
     piano-bench.core
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
+            [piano-bench.notation :as notation]
             [piano-bench.keyboard :as kb]))
 
 (defn nth-octave [n]
@@ -33,6 +34,7 @@
 (defn app []
   [:div
    [:h1 "Piano Bench"]
+   [notation/stave]
    [kb/keyboard
     @(rf/subscribe [:start-key])
     @(rf/subscribe [:pressed])

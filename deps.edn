@@ -3,4 +3,10 @@
         re-frame {:mvn/version "0.11.0"}
         leipzig {:mvn/version "0.10.0"}
         com.bhauman/figwheel-main {:mvn/version "0.2.3"}}
- :paths ["src" "target" "resources"]}
+ :paths ["src" "target" "resources"]
+ :main piano-bench.core
+ :npm-deps false
+ :infer-externs true
+ :foreign-libs [{:file "dist/index.bundle.js"
+                 :provides ["vexflow"]
+                 :global-exports {vexflow Vex}}]}

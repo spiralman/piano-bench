@@ -1,0 +1,26 @@
+{
+  "name": "piano-bench",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spiralman/piano-bench.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spiralman/piano-bench/issues"
+  },
+  "homepage": "https://github.com/spiralman/piano-bench#readme",
+  "dependencies": {
+    "@cljs-oss/module-deps": "github:cljs-oss/module-deps",
+    "vexflow": "^1.2.90",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  }
+}
