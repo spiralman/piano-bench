@@ -31,11 +31,9 @@
         update (fn [comp]
                  (let [{:keys [renderer context]} @vf
                        {:keys [size]} (r/props comp)]
-                   (if (> size 0)
-                     (do
-                       (.clear context)
-                       (.resize renderer size size)
-                       (render-phrase context size)))))]
+                   (.resize renderer size size)
+                   (.clear context)
+                   (render-phrase context size)))]
     (r/create-class
      {:display-name "notation"
       :component-did-mount
@@ -51,4 +49,6 @@
         [:div {}])})))
 
 (defn stave [size]
-  [stave-inner {:size size}])
+  (if (> size 0)
+    [stave-inner {:size size}]
+    [:div]))

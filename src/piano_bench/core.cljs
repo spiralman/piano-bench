@@ -63,7 +63,6 @@
    [split-layout
     [notation/stave :pb/size]
     [kb/keyboard
-     :pb/size
      @(rf/subscribe [:start-key])
      @(rf/subscribe [:pressed])
      #(rf/dispatch [:key-pressed %1 %2])]]])
