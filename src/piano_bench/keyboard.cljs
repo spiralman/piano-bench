@@ -68,12 +68,12 @@
              :fill "#FFFFFF"}
       key-name]]))
 
-(defn keyboard [start-key pressed on-press]
+(defn keyboard [size start-key pressed on-press]
   (let [scale (/ 900 (* 8 white-width))
         end-key (+ start-key 8)
         keys (range start-key end-key)
         black-keys (keep has-black (range (dec start-key) end-key))]
-    [:svg {:width "100%" :height "100%" :view-box "0 0 900 800" :fill "none"}
+    [:svg {:width size :height size :view-box "0 0 900 900" :fill "none"}
      [:g {:transform (str "translate(0,145) scale(" scale ")")}
       (map (partial white-key start-key on-press) keys)
       (map (partial black-key start-key on-press) black-keys)

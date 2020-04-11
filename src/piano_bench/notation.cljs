@@ -10,21 +10,21 @@
                       :duration "q"}))
 
 (defn render-phrase [context]
-  (let [stave (-> (VF.Stave. 10 0 400)
+  (let [stave (-> (VF.Stave. 10 0 800)
                   (.addClef "treble")
                   (.setContext context))
         voice (VF.Voice. #js {:num_beats 1 :beat_value 4})]
     (.addTickables voice #js [(build-note)])
     (-> (VF.Formatter.)
         (.joinVoices #js [voice])
-        (.format #js [voice] 300))
+        (.format #js [voice] 800))
     (.draw stave)
     (.draw voice context stave)))
 
 (defn build-context [el]
   (let [vf (VF.Renderer. el VF.Renderer.Backends.SVG)
         context (.getContext vf)]
-    (.resize vf 300 300)
+    (.resize vf 800 300)
     context))
 
 (defn stave []
