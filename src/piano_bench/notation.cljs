@@ -10,14 +10,14 @@
                       :duration "q"}))
 
 (defn render-phrase [context size]
-  (let [stave (-> (VF.Stave. 10 0 size)
+  (let [stave (-> (VF.Stave. 0 0 198)
                   (.addClef "treble")
                   (.setContext context))
         voice (VF.Voice. #js {:num_beats 1 :beat_value 4})]
     (.addTickables voice #js [(build-note)])
     (-> (VF.Formatter.)
         (.joinVoices #js [voice])
-        (.format #js [voice] 800))
+        (.format #js [voice] 200))
     (.draw stave)
     (.draw voice context stave)))
 
@@ -33,6 +33,7 @@
                        {:keys [size]} (r/props comp)]
                    (.resize renderer size size)
                    (.clear context)
+                   (.setViewBox context 0 0 200 200)
                    (render-phrase context size)))]
     (r/create-class
      {:display-name "notation"
