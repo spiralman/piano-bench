@@ -61,7 +61,7 @@
                  :margin-bottom topbar-margin}}
     "Piano Bench"]
    [split-layout
-    [notation/stave]
+    [notation/stave :pb/size]
     [kb/keyboard
      :pb/size
      @(rf/subscribe [:start-key])
