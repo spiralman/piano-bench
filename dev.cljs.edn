@@ -1,0 +1,3 @@
+^{:auto-testing {:namespaces [piano-bench.test.core]}
+  :watch-dirs ["src" "test"]}
+{:main piano-bench.core}

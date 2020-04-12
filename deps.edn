@@ -10,4 +10,7 @@
  :infer-externs true
  :foreign-libs [{:file "dist/index.bundle.js"
                  :provides ["vexflow"]
-                 :global-exports {vexflow Vex}}]}
+                 :global-exports {vexflow Vex}}]
+ :aliases
+ {:figwheel {:extra-paths ["test"]
+             :main-opts ["-m" "figwheel.main" "--build" "dev" "--repl"]}}}
