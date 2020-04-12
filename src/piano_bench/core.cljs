@@ -3,18 +3,16 @@
   (:require [reagent.core :as reagent]
             [re-frame.core :as rf]
             [breaking-point.core :as bp]
+            [piano-bench.notes :as notes]
             [piano-bench.notation :as notation]
             [piano-bench.keyboard :as kb]))
-
-(defn nth-octave [n]
-  (* 7 (dec n)))
 
 (defonce app-db (reagent/atom {}))
 
 (rf/reg-event-db
  :initialize
  (fn [db _]
-   {:start-key (- (nth-octave 4) 2)}))
+   {:start-key (- (notes/nth-octave 4) 2)}))
 
 (rf/reg-event-db
  :key-pressed
