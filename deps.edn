@@ -13,4 +13,6 @@
                  :global-exports {vexflow Vex}}]
  :aliases
  {:figwheel {:extra-paths ["test"]
-             :main-opts ["-m" "figwheel.main" "--build" "dev" "--repl"]}}}
+             :main-opts ["-m" "figwheel.main" "--build" "dev" "--repl"]}
+  :ci-tests {:extra-paths ["test"]
+             :main-opts ["-m" "figwheel.main" "-m" "piano-bench.test.runner"]}}}

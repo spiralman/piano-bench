@@ -1,4 +1,4 @@
-(ns piano-bench.test.core
+(ns piano-bench.test.notes
   (:require [cljs.test :refer-macros [deftest is testing run-tests]]
             [piano-bench.notes :as notes]))
 
