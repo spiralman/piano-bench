@@ -15,3 +15,9 @@ jobs:
       - uses: actions/checkout@v2
       - name: Unit Tests
         run: clj -A:ci-tests
+      - name: Archive Test Output
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: js-environment.log
+          path: target/public/cljs-out/test/js-environment.log
