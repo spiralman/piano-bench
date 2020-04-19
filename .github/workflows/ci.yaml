@@ -16,7 +16,7 @@ jobs:
       - name: Unit Tests
         run: clj -A:ci-tests
       - name: Archive Test Output
-        if: failure()
+        if: failure() || cancelled()
         uses: actions/upload-artifact@v1
         with:
           name: js-environment.log
