@@ -13,5 +13,11 @@ jobs:
           chmod +x linux-install-1.10.1.536.sh
           sudo ./linux-install-1.10.1.536.sh
       - uses: actions/checkout@v2
+      - uses: actions/cache@v1
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('deps.edn') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
       - name: Unit Tests
         run: clj -A:ci-tests
