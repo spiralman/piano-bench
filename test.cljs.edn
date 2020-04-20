@@ -1,3 +1,2 @@
-^{:launch-js ["/opt/google/chrome/chrome" "--headless" "--disable-gpu" "--repl" :open-url]
-  :log-level :all}
+^{:launch-js "./headless-chrome.sh"}
 {:main piano-bench.test.runner}
