@@ -4,4 +4,4 @@
 
 (deftest nth-octave-4-starts-at-C4
   (is (= (notes/nth-octave 4)
-         21)))
+         22)))
