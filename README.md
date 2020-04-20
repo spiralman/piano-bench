@@ -19,5 +19,3 @@ To run the unit tests one-off, run:
 ```
 clj -A:ci-tests
 ```
-
-The `chrome` will need to be in your path.
